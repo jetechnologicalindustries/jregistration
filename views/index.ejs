@@ -1,0 +1,68 @@
+<head>
+	<title>Members List</title>
+<!-- BOOTSTRAP BUNDLE -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- BOOTSTRAP BUNDLE -->
+</head>
+<body>
+
+	
+	<div class="container">
+		<h3>Add Member</h3>
+		<form method="post" action="/members/add">
+			Name:<input type="text" name="first" placeholder="First Name">
+			<input type="text" name="last" placeholder="Last Name">
+			<br>
+			City: <input type="text" name="city" placeholder="City">
+			<br>
+		 	Age: <input type="number" name="age" placeholder="Age">
+		 	<br>
+		 	<input type="submit" value="Submit">
+		</form>
+	</div>
+
+	<div class="container">
+		<h3>Members List</h3>
+		<div class="table-responsive-sm">
+			<table class="table-dark table-hover" style="width:100%">
+				<tr>
+					<th>Lastname</th>
+			    	<th>Firstname</th> 
+			    	<th>City</th>
+			    	<th>Age</th>
+			    </tr>
+			    <% jregistration.forEach(function(member){ %>
+				<tr>
+					<td>
+						<%= member.value.last %>
+					</td>
+					<td>
+						<%= member.value.first %>
+					</td>
+					<td>
+						<%= member.value.city %>
+					</td>
+					<td>
+						<%= member.value.age %>
+					</td>
+					<td>
+						<form method="post" action="/members/delete/<%= member.key  %>">
+							<input type="hidden" value="<%= member.value.rev %>" name="rev">
+							<input type="submit" value="X">
+						</form>
+					</td>
+				</tr>
+				<% }); %>
+			</table>
+		</div>		
+	</div>
+
+
+<!-- JQUERY CDN BUNDLE -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+<!-- JQUERY CDN BUNDLE -->
+<!-- BOOTSTRAP BUNDLE -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+<!-- BOOTSTRAP BUNDLE -->
+</body>
