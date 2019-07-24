@@ -29,6 +29,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
 app.get('/', function(req, res){
 	couch.get(dbName, viewUrl).then(
 		function(data, headers, status){
@@ -82,6 +83,22 @@ app.post('/members/delete/:id', function(req, res){
 		});
 });
 
-app.listen(port, function(){
-	console.log('Server running on ' + port)
-}) 
+function serverStart() {
+	app.listen(port, function(){
+		console.log('        ____.______________________                           .__                     ');
+		console.log('        |    |\\_   _____/\\__    ___/   ______ ______________  _|__| ____  ____   ______');
+		console.log('        |    | |    __)_   |    |     /  ___// __ \\_  __ \\  \\/ /  |/ ___\\/ __ \\ /  ___/');
+		console.log('    /\\__|    | |        \\  |    |     \\___ \\\\  ___/|  | \\/\\   /|  \\  \\__\\  ___/ \\___ \\ ');
+		console.log('    \\________|/_______  /  |____|    /____  >\\___  >__|    \\_/ |__|\\___  >___  >____  >');
+		console.log('                      \\/                  \\/     \\/                    \\/    \\/     \\/ ');
+		console.log('  _________                                 __________                    .__                ');
+		console.log(' /   _____/ ______________  __ ___________  \\______   \\__ __  ____   ____ |__| ____    ____  ');
+		console.log(' \\_____  \\_/ __ \\_  __ \\  \\/ // __ \\_  __ \\  |       _/  |  \\/    \\ /    \\|  |/    \\  / ___\\ ');
+		console.log(' /        \\  ___/|  | \\/\\   /\\  ___/|  | \\/  |    |   \\  |  /   |  \\   |  \\  |   |  \\/ /_/  >');
+		console.log('/_______  /\\___  >__|    \\_/  \\___  >__|     |____|_  /____/|___|  /___|  /__|___|  /\\___  / ');
+		console.log('        \\/     \\/                 \\/                \\/           \\/     \\/        \\//_____/  ');
+		console.log(' =================================Server running on ' + port + '===================================')
+	}); 
+};
+
+setTimeout(serverStart, 1000);
