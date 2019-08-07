@@ -1,9 +1,13 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const path = require('path');
 const NodeCouchDB = require('node-couchdb')
-const port = '8080';
+const exphbs = require('express-handlebars');
+const logger = require('./middleware/logger');
+const tynt = require('tynt');
+const moment = require('moment');
+const port = process.env.PORT || 8080;
 
+//db start
 const couch = new NodeCouchDB({
 	auth: {
 		user: 'admin',
@@ -19,29 +23,38 @@ couch.listDatabases().then(function(dbs){
 	console.log(dbs);
 	console.log('Database connection successful.');
 });
-
+//db end
 
 const app = express();
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// Init middleware
+app.use(logger);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+// Handlebars Middleware
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
+
+// Body Parser Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 
-app.get('/', function(req, res){
-	couch.get(dbName, viewUrl).then(
-		function(data, headers, status){
-			console.log(data.data.rows);
-			res.render('index',{
-				jregistration:data.data.rows
-			});
-		},
-		function(err){
-			res.send(err);
-		}
-	);
+
+// Homepage Route
+app.get('/', function(req,res){
+  couch.get(dbName, viewUrl).then(
+  	function(data, headers, status){
+  		console.log(
+		    `${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + ` : ${tynt.Green('Members data rendered')}`
+		  );
+  		res.render('index', {
+		    title: 'Member App',
+		    members: data.data.rows
+		  });
+  	},
+  	function(err){
+  		res.send(err);
+  	});
 });
 
 app.post('/members/add', function(req,res){
@@ -49,7 +62,13 @@ app.post('/members/add', function(req,res){
 	const last = req.body.last;
 	const city = req.body.city;
 	const age = req.body.age;
-
+	const dob = req.body.dob;
+	const com = req.body.com;
+	const contact = req.body.contact;
+	const email = req.body.email;
+	const standing = "good";
+	const lastpayment = "";
+	const dues = "0";
 
 	couch.uniqid().then(function(ids){
 		const id = ids[0];
@@ -59,9 +78,19 @@ app.post('/members/add', function(req,res){
 			first: first,
 			last: last,
 			city: city,
-			age: age
+			age: age,
+			dob: dob,
+			com: com,
+			contact: contact,
+			email: email,
+			standing: standing,
+			lastpayment: lastpayment,
+			dues: dues
 		}).then(
 			function(data, headers, status){
+				console.log(
+		    	`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + ` : ${tynt.Green(first +' '+last+' successfully added')}`
+		  		);
 				res.redirect('/');
 			},
 			function(err){
@@ -76,6 +105,9 @@ app.post('/members/delete/:id', function(req, res){
 
 	couch.del(dbName, id, rev).then(
 		function(data, headers, status){
+			console.log(
+		    	`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + ` : ${tynt.Red('user no. '+id+' removed successfully')}`
+		  		);
 			res.redirect('/');
 		},
 		function(err){
