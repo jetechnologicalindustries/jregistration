@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            {{# if link1}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link1url}}">{{link1name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link2}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link2url}}">{{link2name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link3}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link3url}}">{{link3name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link4}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link4url}}">{{link4name}}</a>
+            </li>
+            {{/ if}}
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="{{titleurl}}"> {{navtitle}} </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            {{# if link5}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link5url}}">{{link5name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link6}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link6url}}">{{link6name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link7}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link7url}}">{{link7name}}</a>
+            </li>
+            {{/ if}}
+            {{# if link8}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{link8url}}">{{link8name}}</a>
+            </li>
+            {{/ if}}
+        </ul>
+    </div>
+</nav>
