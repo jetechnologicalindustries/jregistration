@@ -4,7 +4,7 @@
 <div class="container mt-3">
 <div class='p-4 bg-light'>
   <h3>Add Member</h3>
-  <form method="post" action="/jregistration/members/add/new">
+  <form id='addform' method="post" action="/jregistration/members/add/new">
       <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputFirst">First Name</label>
@@ -49,10 +49,11 @@
           All fields are double checked
         </label>
       </div>
-      <button type="submit" class="btn btn-primary">Add Member</button>
+      <button id='addMember' type="submit" class="btn btn-primary">Add Member</button>
   </form>
 </div>
 </div>
+
 
 
 <script type="text/javascript">

@@ -31,35 +31,41 @@
         <thead>
         <tr>
           <th class='pl-3'>Lastname</th>
-          <th class='pl-3'>Firstname</th> 
-          <th class='pl-3'>City</th>
-          <th class='pl-3'>Age</th>
+          <th class='pl-1'>Firstname</th> 
+          <th class='pl-1'>Age</th>
+          <th class='pl-1'>City</th>
+          <th class='pl-1'>Company</th>
           <th class='text-center'>Options</th>
         </tr>
         </thead>
         <tbody>
           {{#each members}}
         <tr id='row{{this.key}}'>
-          <td class='pl-3'>
+          <td class='pl-1'>
             {{this.value.last}}
           </td>
-          <td class='pl-3'>
+          <td class='pl-1'>
             {{this.value.first}}
           </td>
-          <td class='pl-3'>
-            {{this.value.city}}
-          </td>
-          <td class='pl-3'>
+          <td class='pl-1'>
             {{this.value.age}}
           </td>
-          <td>
-            
+          <td class='pl-1'>
+            {{this.value.city}}
+          </td>
+          <td class='pl-1'>
+            {{this.value.com}}
+          </td>
+          <td>            
             <div class='text-center'>
               <button type='button' class='btn btn-info editBtn' id='e{{this.key}}' data-toggle='modal' data-target='#modup'>
-                <span class='text-white'>&#9998;</span>
+                <span class='text-white'>✏</span>
+              </button>
+              <button type='button' class='btn btn-info printBtn' id='p{{this.key}}' data-toggle='modal' data-target='#modprint'>
+                <span class='text-white'>🖨️</span>
               </button>
               <button type='button' class='btn btn-danger delBtn' id='d{{this.key}}' data-toggle='modal' data-target='#moddel'>
-                <span class='text-white' aria-hidden='true'>&times;</span>
+                <span class='text-white' aria-hidden='true'>✖️</span>
               </button>
             </div>
 
@@ -68,33 +74,6 @@
         {{/each}}
       </tbody>
       </table>
-
-            <!-- Modal Delete -->
-            <div class='modal fade' id='moddel' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-              <div class='modal-dialog' role='document'>
-                <div class='modal-content'>
-                  <div class='modal-header bg-danger'>
-                    <h5 class='modal-title text-white' id='exampleModalLabel'>Warning</h5>
-                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
-                      <span class='text-white' aria-hidden='true'>&times;</span>
-                    </button>
-                  </div>
-                  <div class='modal-body text-dark'>
-                    Are you sure you want to delete <strong><span id='delHeader'></span></strong> from the database?
-                  </div>
-                  <div class='modal-footer'>
-                    <form id='delForm' class='delForm' method='post' action='/jregistration/member/delete'>
-                      <input type='hidden' name='delName' id='delName' value=''>
-                      <input type='hidden' name='delKey' id='delKey' value=''>
-                      <input type='hidden' name='delRev' id='delRev' value=''>
-                      <button type='submit' class='btn btn-danger'>Delete</button>
-                      <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Modal -->
             <!-- Modal Update -->
             <div class='modal fade' id='modup' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
               <div class='modal-dialog' role='document'>
@@ -107,9 +86,9 @@
                   </div>
                   <div class='modal-body text-dark'>
                     Currently editing <strong><span id='editHeader'></span></strong>.
-                    <form id='editForm' class='editForm'method='post' action='/jregistration/members/edit/'>
-                      <input type='hidden' name='key' id='upKey' value=''>
-                      <input type='hidden' name='rev' id='upRev' value=''>
+                    <form id='editForm' class='editForm'method='post' action='/jregistration/member/edit/'>
+                      <input type='hidden' name='ekey' id='upKey' value=''>
+                      <input type='hidden' name='erev' id='upRev' value=''>
                       <div class='form-row'>
                         <div class='form-group col-md-6'>
                             <label for='inputeFirst'>First Name</label>
@@ -172,9 +151,59 @@
                     </div>
                   </div>
                   <div class='modal-footer'>
-                    <button type='submit' class='btn btn-success'>Save Changes</button>
+                    <button type='submit' id="updateSendBtn" class='btn btn-success'>Save Changes</button>
                     </form>
                     <form method='post'>
+                      <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+             <!-- Modal Print -->
+            <div class='modal fade' id='modprint' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+              <div class='modal-dialog' role='document'>
+                <div class='modal-content'>
+                  <div class='modal-header bg-info'>
+                    <h5 class='modal-title text-white' id='exampleModalLabel'></h5>
+                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                      <span class='text-white' aria-hidden='true'>&times;</span>
+                    </button>
+                  </div>
+                  <div class='modal-body text-dark'>
+                    Are you sure you want to print <strong><span id='printHeader'></span></strong>?
+                  </div>
+                  <div class='modal-footer'>
+                    <form id='printForm' class='printForm' method='post' action=''>
+                      <button type='submit' class='btn btn-info'>Print</button>
+                      <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal -->
+             <!-- Modal Delete -->
+            <div class='modal fade' id='moddel' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+              <div class='modal-dialog' role='document'>
+                <div class='modal-content'>
+                  <div class='modal-header bg-danger'>
+                    <h5 class='modal-title text-white' id='exampleModalLabel'>Warning</h5>
+                    <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                      <span class='text-white' aria-hidden='true'>&times;</span>
+                    </button>
+                  </div>
+                  <div class='modal-body text-dark'>
+                    Are you sure you want to delete <strong><span id='delHeader'></span></strong> from the database?
+                  </div>
+                  <div class='modal-footer'>
+                    <form id='delForm' class='delForm' method='post' action='/jregistration/member/delete'>
+                      <input type='hidden' name='delName' id='delName' value=''>
+                      <input type='hidden' name='delKey' id='delKey' value=''>
+                      <input type='hidden' name='delRev' id='delRev' value=''>
+                      <input type='hidden' name='routerUrl' id='routerUrl' value='/jregistration/members/'>
+                      <button type='submit' class='btn btn-danger'>Delete</button>
                       <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                     </form>
                   </div>
@@ -185,6 +214,6 @@
 
 </div>
 
-<script type='text/javascript'>
+<script type="text/javascript">
 
 </script>

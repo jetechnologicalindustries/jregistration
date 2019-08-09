@@ -1,0 +1,13 @@
+<!-- <input type='hidden' name='routerUrl' id='routerUrl' value=''> -->
+{{# if rerouter}}
+<form id='rerouteForm' type='hidden' method='post' action='{{routerUrl}}'>
+  <input type='hidden' name='redirectMsg' class='redirectMsg' value='{{alertMsg}}'>
+  <input type='hidden' name='redirecttype' class='redirecttype' value='{{alerttype}}'>
+</form>
+{{/if}}
+	
+
+<script type="text/javascript">
+	console.log('on rerouter page')
+	console.log('{{alertMsg}}')
+</script>

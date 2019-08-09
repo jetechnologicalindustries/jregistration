@@ -6,7 +6,8 @@ const logger = require('./middleware/logger');
 const tynt = require('tynt');
 const moment = require('moment');
 const hbs = exphbs.create({
-	defaultLayout: 'main'
+	defaultLayout: 'main',
+	extname: '.jets'
 });
 const port = process.env.PORT || 8080;
 
@@ -49,8 +50,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/jregistration', logger);
 
 // Handlebars Middleware
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
+app.engine('.jets', hbs.engine);
+app.set('view engine', '.jets');
 
 // Body Parser Middleware
 app.use(express.json());
@@ -95,13 +96,14 @@ app.get('/jregistration', function(req,res){
 	});
 });
 
-app.get('/jregistration/members', function(req,res){
+app.all('/jregistration/members', function(req,res){
   couch.get(dbName, viewUrl).then(
   	function(data, headers, status){
   		let text='Members data rendered';
   		timeStampG(text);
   		res.render('membersPage', {
-  			alertMsg: undefined,
+  			alertMsg: undefined || req.body.redirectMsg,
+  			alerttype: undefined || req.body.redirecttype,
   			title: 'Members Page',
   			titleurl: '/jregistration',
   			navtitle: 'JRegistration',
@@ -125,10 +127,11 @@ app.get('/jregistration/members', function(req,res){
   	});
 });
 
-app.get('/jregistration/members/new', function(req,res){
+app.all('/jregistration/members/new', function(req,res){
 	res.render('newmemberPage', { 
-  		alertMsg: undefined,
+  		alertMsg: undefined  || req.body.redirectMsg,
   		title: 'Create New',
+  		alerttype: 'success',
   		titleurl: '/jregistration',
   		navtitle: 'JRegistration',
   		link1: 1,
@@ -181,30 +184,66 @@ app.post('/jregistration/members/add/new', function(req,res){
 			function(data, headers, status){
 		  		let text= first +' '+last+' successfully added';
 		  		timeStampG(text);
-				res.render('newmemberPage', {
+				res.render('rerouter', {
 					alertMsg: text,
-					alertg: 'success',
-					title: 'Create New',
-  					titleurl: '/jregistration',
-  					navtitle: 'JRegistration',
-  					link1: 1,
-  					link1url: '/jregistration',
-  					link1name: 'Home',
-  					link2: 1,
-					link2url: '/jregistration/members',
-					link2name: 'Members',
-					link3: 1,
-					link3url: '/jregistration/members/new',
-					link3name: 'New',
-					link8: 1,
-					link8url: '/',
-					link8name: 'JET Services'
+					rerouter: true,
+					routerUrl: '/jregistration/members/new',
 				});
 			},
 			function(err){
 				res.send(err);
 		});
 	});
+});
+
+app.post('/jregistration/member/edit/', function(req, res){
+	const id = req.body.ekey;
+	const rev = req.body.erev;
+	const first = req.body.first;
+	const last = req.body.last;
+	const city = req.body.city;
+	const age = req.body.age;
+	const dob = req.body.dob;
+	const com = req.body.com;
+	const contact = req.body.contact;
+	const email = req.body.email;
+	const standing = req.body.standing;
+	const lastpayment = req.body.lastpayment;
+	const lastpayamt = req.body.lastpayamt;
+	const dues = req.body.dues;
+	console.log(timeStampR(id))
+	console.log(timeStampR(rev))
+	couch.update(dbName, {
+		_id: id,
+		_rev: rev,
+		first: first,
+		last: last,
+		city: city,
+		age: age,
+		dob: dob,
+		com: com,
+		contact: contact,
+		email: email,
+		standing: standing,
+		lastpayment: lastpayment,
+		lastpayamt: lastpayamt,
+		dues: dues
+		}).then(
+		function(data, headers, status){
+			let text= first +' '+ last +' successfully updated';
+		  	timeStampG(text);
+		  	res.render('rerouter', {
+				alertMsg: text,
+				alerttype: 'success',
+				rerouter: true,
+				routerUrl: '/jregistration/members',
+				title: 'Loading...',
+			  	});
+			},
+			function(err){
+				console.log(err);
+				res.redirect('/jregistration/members');
+		});
 });
 
 app.post('/jregistration/member/delete/', function(req, res){
@@ -215,38 +254,18 @@ app.post('/jregistration/member/delete/', function(req, res){
 	console.log(timeStampR(rev))
 	couch.del(dbName, id, rev).then(
 		function(data, headers, status){
-			couch.get(dbName, viewUrl).then(
-			  	function(data, headers, status){
-			  		let text= name +' removed successfully';
-		  			timeStampR(text);
-			  		res.render('membersPage', {
-			  			alertMsg: text,
-			  			title: 'Members Page',
-			  			titleurl: '/jregistration',
-			  			navtitle: 'JRegistration',
-			  			link1: 1,
-			  			link1url: '/jregistration',
-			  			link1name: 'Home',
-			  			link2: 1,
-						link2url: '/jregistration/members',
-						link2name: 'Members',
-						link3: 1,
-						link3url: '/jregistration/members/new',
-						link3name: 'New',
-						link8: 1,
-						link8url: '/',
-						link8name: 'JET Services',
-					    members: data.data.rows
-					  });
-			  	},
-			  	function(err){
-			  		console.log(err);
-					res.redirect('/jregistration/members');
+			let text= name +' removed successfully';
+		  	timeStampR(text);
+		  	res.render('rerouter', {
+				alertMsg: text,
+				rerouter: true,
+				routerUrl: '/jregistration/members',
+				title: 'Loading...'
 			  	});
-		},
-		function(err){
-			console.log(err);
-			res.redirect('/jregistration/members');
+			},
+			function(err){
+				console.log(err);
+				res.redirect('/jregistration/members');
 		});
 });
 

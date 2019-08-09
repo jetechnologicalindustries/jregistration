@@ -1,8 +1,11 @@
 let alertMsg = [];
 alertMsg[0] = 'Member details deleted successfully';
 alertMsg[1] = 'Member details updated successfully';
-
+alertMsg[2] = 'Please complete all the required fields';
+let pathname = (window.location.pathname).toString();
+console.log(pathname);
 let targetUrl;
+let rerouter = '{{rerouter}}';
 
 $('.closebtn').click(function() {
 	let div = this.parentElement;
@@ -11,18 +14,16 @@ $('.closebtn').click(function() {
 
 $(".editBtn").click(function() {
     let x = this.id;
-    let id = x.substring(1, 33);
-    let rev = x.substring(38, x.length);
+    let id = x.substring(1, x.length);
     console.log(id);
-    console.log(rev)
-    $("#delKey").val(id);
-	$("#delRev").val(rev);
+    $("#upKey").val(id);
 	let name;
     for (var i = member.length - 1; i >= 0; i--) {
 	    if (member[i].key === id) {
-	        console.log(member[i].first +' '+ member[i].last);
-	    	name = member[i].first +' '+ member[i].last;
+	        console.log('Pulling up  ' + member[i].first +' '+ member[i].last +"'s data");
+	        name = member[i].first +' '+ member[i].last;
 	    	$('#editHeader').text(name);
+	    	$("#upRev").val(member[i].rev);
 	    	$('#inputeFirst').val(member[i].first);
 			$('#inputeLast').val(member[i].last);
 			$('#inputeAge').val(member[i].age);
@@ -37,6 +38,21 @@ $(".editBtn").click(function() {
 			$('#inputeDues').val(member[i].dues);
 	    };
   	};
+  	console.log('rev# ' + $("#upRev").val());
+});
+
+$(".printBtn").click(function() {
+    let x = this.id;
+    let id = x.substring(1, x.length);
+    console.log(id);
+	let name;
+    for (var i = member.length - 1; i >= 0; i--) {
+	    if (member[i].key === id) {
+	        console.log(member[i].first +' '+ member[i].last);
+	    	name = member[i].first +' '+ member[i].last;
+	    };
+  	};
+	$("#printHeader").text(name);
 });
 
 $(".delBtn").click(function() {
@@ -61,24 +77,40 @@ $(".delBtn").click(function() {
 
 $('form.delForm').on('submit', function() {
 	$('#moddel').modal('toggle');
-	$('.alertMsg').text(alertMsg[0]);
-	$('#alert').removeClass("success");
-	$('#alert').removeClass('d-none');
 	$("#delForm").submit();
     return false
 });
 
 $('form.editForm').on('submit', function() {
-	$('#modup').modal('toggle');
-	$('.alertMsg').text(alertMsg[1]);
-	$('#alert').addClass("success");
-	$('#alert').removeClass('d-none');
+	// $('#modup').modal('toggle');
+	$("#updateSendBtn").attr("disabled", true);
+	$("#updateSendBtn").text('Adding...');
+	$("#editForm").submit();
 	return false
 });
 
+$('#addMember').click(function() {
+	$("#addMember").attr("disabled", true);
+	$("#addMember").text('Adding...');
+	let f = $("#inputFirst").val();
+	let l = $("#inputLast").val();
+	let name = f +' '+ l;
+	console.log(f);
+	if (name===' ') {
+		console.log('Must put a name');
+		$("#addMember").attr("disabled", false);
+		$("#addMember").text('Add Member');
+	}else{
+		$("#addform").submit();
+	}
+	return false
+});
 
-  
+	
 $(document).ready(function () {
+	//for rerouter
+	$("#rerouteForm").submit();
+	//for rerouter end
 	$('#dtBasicExample').DataTable();
 	$('.dataTables_length').addClass('bs-select');
 
