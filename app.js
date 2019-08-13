@@ -126,7 +126,7 @@ app.all('/jregistration/members', function(req,res){
   		let text='Cannot connect to database';
   		timeStampR(err);
   		res.render('jregistrationPage', { 
-		  		alertMsg: undefined,
+		  		alertMsg: text,
 		  		title: 'JRegistration Homepage',
 		  		titleurl: '/jregistration',
 		  		navtitle: 'JRegistration',
