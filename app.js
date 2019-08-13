@@ -123,7 +123,26 @@ app.all('/jregistration/members', function(req,res){
 		  });
   	},
   	function(err){
-  		res.send(err);
+  		let text='Cannot connect to database';
+  		timeStampR(err);
+  		res.render('jregistrationPage', { 
+		  		alertMsg: undefined,
+		  		title: 'JRegistration Homepage',
+		  		titleurl: '/jregistration',
+		  		navtitle: 'JRegistration',
+		  		link1: 1,
+		  		link1url: '/jregistration',
+		  		link1name: 'Home',
+		  		link2: 1,
+				link2url: '/jregistration/members',
+				link2name: 'Members',
+				link3: 1,
+				link3url: '/jregistration/members/new',
+				link3name: 'New',
+				link8: 1,
+				link8url: '/',
+				link8name: 'JET Services'
+  		});
   	});
 });
 
@@ -272,19 +291,19 @@ app.post('/jregistration/member/delete/', function(req, res){
 
 function serverStart() {
 	app.listen(port, function(){
-		console.log('        ____.______________________                           .__                     ');
-		console.log('        |    |\\_   _____/\\__    ___/   ______ ______________  _|__| ____  ____   ______');
-		console.log('        |    | |    __)_   |    |     /  ___// __ \\_  __ \\  \\/ /  |/ ___\\/ __ \\ /  ___/');
-		console.log('    /\\__|    | |        \\  |    |     \\___ \\\\  ___/|  | \\/\\   /|  \\  \\__\\  ___/ \\___ \\ ');
-		console.log('    \\________|/_______  /  |____|    /____  >\\___  >__|    \\_/ |__|\\___  >___  >____  >');
-		console.log('                      \\/                  \\/     \\/                    \\/    \\/     \\/ ');
-		console.log('  _________                                 __________                    .__                ');
-		console.log(' /   _____/ ______________  __ ___________  \\______   \\__ __  ____   ____ |__| ____    ____  ');
-		console.log(' \\_____  \\_/ __ \\_  __ \\  \\/ // __ \\_  __ \\  |       _/  |  \\/    \\ /    \\|  |/    \\  / ___\\ ');
-		console.log(' /        \\  ___/|  | \\/\\   /\\  ___/|  | \\/  |    |   \\  |  /   |  \\   |  \\  |   |  \\/ /_/  >');
-		console.log('/_______  /\\___  >__|    \\_/  \\___  >__|     |____|_  /____/|___|  /___|  /__|___|  /\\___  / ');
-		console.log('        \\/     \\/                 \\/                \\/           \\/     \\/        \\//_____/  ');
-		console.log(' =================================Server running on ' + port + '===================================')
+		console.log(`${tynt.Yellow('        ____.______________________                           .__                     ')}`);
+		console.log(`${tynt.Yellow('        |    |\\_   _____/\\__    ___/   ______ ______________  _|__| ____  ____   ______')}`);
+		console.log(`${tynt.Yellow('        |    | |    __)_   |    |     /  ___// __ \\_  __ \\  \\/ /  |/ ___\\/ __ \\ /  ___/')}`);
+		console.log(`${tynt.Yellow('    /\\__|    | |        \\  |    |     \\___ \\\\  ___/|  | \\/\\   /|  \\  \\__\\  ___/ \\___ \\ ')}`);
+		console.log(`${tynt.Yellow('    \\________|/_______  /  |____|    /____  >\\___  >__|    \\_/ |__|\\___  >___  >____  >')}`);
+		console.log(`${tynt.Yellow('                      \\/                  \\/     \\/                    \\/    \\/     \\/ ')}`);
+		console.log(`${tynt.Yellow('  _________                                 __________                    .__                ')}`);
+		console.log(`${tynt.Yellow(' /   _____/ ______________  __ ___________  \\______   \\__ __  ____   ____ |__| ____    ____  ')}`);
+		console.log(`${tynt.Yellow(' \\_____  \\_/ __ \\_  __ \\  \\/ // __ \\_  __ \\  |       _/  |  \\/    \\ /    \\|  |/    \\  / ___\\ ')}`);
+		console.log(`${tynt.Yellow(' /        \\  ___/|  | \\/\\   /\\  ___/|  | \\/  |    |   \\  |  /   |  \\   |  \\  |   |  \\/ /_/  >')}`);
+		console.log(`${tynt.Yellow('/_______  /\\___  >__|    \\_/  \\___  >__|     |____|_  /____/|___|  /___|  /__|___|  /\\___  / ')}`);
+		console.log(`${tynt.Yellow('        \\/     \\/                 \\/                \\/           \\/     \\/        \\//_____/  ')}`);
+		console.log(`${tynt.Yellow(' =================================Server running on '+ port +' ===================================')}`);
 	}); 
 };
 
