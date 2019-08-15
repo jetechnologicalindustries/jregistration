@@ -9,6 +9,11 @@
 	<link rel='stylesheet' type='text/css' href='/css/jquery.dataTables.min.css' />
 <!-- CUSTOM STYLESHEET -->
 	<link rel='stylesheet' type='text/css' href='/css/style.css' />
+  <script type="text/javascript">
+    let demo = false;
+    demo = false;
+  </script>
+  
 </head>
 <body class="bodyBg">
 

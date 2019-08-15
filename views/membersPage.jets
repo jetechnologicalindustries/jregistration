@@ -3,7 +3,6 @@
 {{> viewport}}
 
 <script type='text/javascript'>
-  let demo = false;
   let member = [];
   function user(key, rev, last, first, city, age, dob, com, contact, email, standing, lastpayment, lastpayamt, dues) {
     this.key = key;
