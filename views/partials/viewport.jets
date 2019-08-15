@@ -1,0 +1,10 @@
+<div id="portaitalert" class="container bg-light text-center p-2 invisible">
+    <div class='m-3'>
+	    <strong>
+	    Device is in portrait mode
+	    <br>
+	    Please switch into landscape mode to view page properly
+	    </strong>
+    </div>
+    <img class="img-fluid"  src="/images/switch.gif">
+</div>

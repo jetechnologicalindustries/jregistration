@@ -5,8 +5,9 @@
 	<title>{{title}}</title>
 <!-- BOOTSTRAP BUNDLE -->
 	<link rel='stylesheet' type='text/css' href='/css/bootstrap.min.css' />
-<!-- BOOTSTRAP BUNDLE -->
+<!-- DATATABLE BUNDLE -->
 	<link rel='stylesheet' type='text/css' href='/css/jquery.dataTables.min.css' />
+<!-- CUSTOM STYLESHEET -->
 	<link rel='stylesheet' type='text/css' href='/css/style.css' />
 </head>
 <body class="bodyBg">
@@ -17,13 +18,21 @@
 
 <!-- JQUERY CDN BUNDLE -->
    <script type="text/javascript" src="/js/jquery.min.js"></script>
-<!-- JQUERY CDN BUNDLE -->
 <!-- BOOTSTRAP BUNDLE -->
   <script type="text/javascript" src="/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
-<!-- BOOTSTRAP BUNDLE -->
+<!-- DATATABLE BUNDLE -->
   <script type="text/javascript" src='/js/jquery.dataTables.min.js'></script>
+<!-- CUSTOM JS -->
   <script type="text/javascript" src='/js/main.js'></script>
+{{#if validator}}
+<!-- CUSTOM Validator -->
+  <script type="text/javascript" src='/js/validation.js'></script>
+{{/if}}
+{{#if golev}}
+<!-- CUSTOM GoLev Script -->
+  <script type="text/javascript" src='/js/golev.js'></script>
+{{/if}}
 </body>
 
 

@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const logger = require('./middleware/logger');
 const tynt = require('tynt');
 const moment = require('moment');
+const fs = require('fs');
 const hbs = exphbs.create({
 	defaultLayout: 'main',
 	extname: '.jets'
@@ -32,12 +33,17 @@ couch.listDatabases().then(function(dbs){
 const app = express();
 
 //timestamper
-function timeStampG(text){
-	console.log(`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + ` : ${tynt.Green(text)}`);
-};
-
-function timeStampR(text){
-	console.log(`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + ` : ${tynt.Red(text)}`);
+function timeStamp(color, text){
+	let x = color;
+	let y;
+	if (x==='Red') {
+		y = ` : ${tynt.Red(text)}`;
+	} else	{
+		if (x==='Green') {
+			y = ` : ${tynt.Green(text)}`;
+		}
+	};
+	console.log(`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + y);
 };
 
 // app.get('/favicon.ico', (req, res) => res.status(204));
@@ -71,6 +77,9 @@ app.get('/', function(req,res){
   		link2: 1,
 		link2url: '/jregistration',
 		link2name: 'JRegistration',
+		link3: 1,
+		link3url: '/golev',
+		link3name: 'GoLev SKU',
 	});
 });
 
@@ -100,7 +109,7 @@ app.all('/jregistration/members', function(req,res){
   couch.get(dbName, viewUrl).then(
   	function(data, headers, status){
   		let text='Members data rendered';
-  		timeStampG(text);
+  		timeStamp('Green', text);
   		res.render('membersPage', {
   			alertMsg: undefined || req.body.redirectMsg,
   			alerttype: undefined || req.body.redirecttype,
@@ -123,9 +132,13 @@ app.all('/jregistration/members', function(req,res){
 		  });
   	},
   	function(err){
-  		let text='Cannot connect to database';
-  		timeStampR(err);
-  		res.render('jregistrationPage', { 
+  		let text='Cannot connect to database, now using demo-data. Actions are limited, options are disabled';
+  		timeStamp('Red', text);
+  		timeStamp('Red', err);
+  		fs.readFile('./files/demo.json', 'utf8', function(err2, data) {
+			if (err2) throw err2;
+			let members = (data);
+			res.render('membersPage', { 
 		  		alertMsg: text,
 		  		title: 'JRegistration Homepage',
 		  		titleurl: '/jregistration',
@@ -141,8 +154,11 @@ app.all('/jregistration/members', function(req,res){
 				link3name: 'New',
 				link8: 1,
 				link8url: '/',
-				link8name: 'JET Services'
+				link8name: 'JET Services',
+				demomembers: members
   		});
+		});
+
   	});
 });
 
@@ -164,7 +180,8 @@ app.all('/jregistration/members/new', function(req,res){
 		link3name: 'New',
 		link8: 1,
 		link8url: '/',
-		link8name: 'JET Services'
+		link8name: 'JET Services',
+		validator: true
 	});
 });
 
@@ -202,7 +219,7 @@ app.post('/jregistration/members/add/new', function(req,res){
 		}).then(
 			function(data, headers, status){
 		  		let text= first +' '+last+' successfully added';
-		  		timeStampG(text);
+		  		timeStamp('Green', text);
 				res.render('rerouter', {
 					alertMsg: text,
 					rerouter: true,
@@ -230,8 +247,8 @@ app.post('/jregistration/member/edit/', function(req, res){
 	const lastpayment = req.body.lastpayment;
 	const lastpayamt = req.body.lastpayamt;
 	const dues = req.body.dues;
-	console.log(timeStampR(id))
-	console.log(timeStampR(rev))
+	console.log(timeStamp('Red', id))
+	console.log(timeStamp('Red', rev))
 	couch.update(dbName, {
 		_id: id,
 		_rev: rev,
@@ -250,7 +267,7 @@ app.post('/jregistration/member/edit/', function(req, res){
 		}).then(
 		function(data, headers, status){
 			let text= first +' '+ last +' successfully updated';
-		  	timeStampG(text);
+		  	timeStamp('Green', text);
 		  	res.render('rerouter', {
 				alertMsg: text,
 				alerttype: 'success',
@@ -269,12 +286,12 @@ app.post('/jregistration/member/delete/', function(req, res){
 	const id = req.body.delKey;
 	const rev = req.body.delRev;
 	const name = req.body.delName;
-	console.log(timeStampR(id))
-	console.log(timeStampR(rev))
+	console.log(timeStamp('Red', id))
+	console.log(timeStamp('Red', rev))
 	couch.del(dbName, id, rev).then(
 		function(data, headers, status){
 			let text= name +' removed successfully';
-		  	timeStampR(text);
+		  	timeStamp('Red', text);
 		  	res.render('rerouter', {
 				alertMsg: text,
 				rerouter: true,
@@ -288,6 +305,27 @@ app.post('/jregistration/member/delete/', function(req, res){
 		});
 });
 
+app.get('/golev', function(req,res){
+	fs.readFile('./files/items.json', 'utf8', function(err, data) {
+		if (err) throw err;
+		let items =  (data);
+		res.render('golevPage', { 
+	  		alertMsg: undefined,
+	  		title: 'GoLev SKU',
+	  		titleurl: '/golev',
+	  		navtitle: 'GoLev SKU',
+	  		link1: 1,
+	  		link1url: '/golev',
+	  		link1name: 'Home',
+			link8: 1,
+			link8url: '/',
+			link8name: 'JET Services',
+			golev: true,
+			items: items
+		});
+	});
+
+});
 
 function serverStart() {
 	app.listen(port, function(){

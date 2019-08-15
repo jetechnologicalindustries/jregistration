@@ -1,6 +1,11 @@
 {{> navbar}}
 {{> alert}}
 
+<div id="content" class="container mt-3">
+
+
+</div>
+
 <script type="text/javascript">
 
 </script>
