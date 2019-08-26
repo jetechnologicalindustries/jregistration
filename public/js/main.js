@@ -6,7 +6,7 @@ let pathname = (window.location.pathname).toString();
 console.log(pathname);
 let targetUrl;
 let rerouter = '{{rerouter}}';
-let mustbeLandscape = true; //handler for viewportcheker
+
 
 
 $('form.delForm').on('submit', function() {

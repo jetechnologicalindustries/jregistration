@@ -80,6 +80,8 @@ app.get('/', function(req,res){
 		link3: 1,
 		link3url: '/golev',
 		link3name: 'GoLev SKU',
+		jets: true,
+		allowPortrait: true,
 	});
 });
 

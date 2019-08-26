@@ -1,8 +1,29 @@
-{{> navbar}}
+
 {{> alert}}
 
-<div id="content" class="container mt-3">
+<div id="content" class="">
 
+	<header class="masthead">
+		<!-- <div id="bg-opaque"class="h-100" style="background: rgba(99, 99, 99, 0.6);"> -->
+		<div id="bg-opaque"class="h-100" style="background: rgba(0, 83, 138, 0.6);">
+		  <div class="container h-100">
+		    <div class="row h-100 align-items-center">
+		      <div class="col-12 text-center py-5" style="">
+		        <h1 id="mainheader" class="text-white"></h1>
+		        <p id="mainheadersub" class="lead text-white"></p>
+		      </div>
+		    </div>
+		  </div>
+	    </div>
+	</header>
+{{> navbar}}
+	<!-- Page Content -->
+	<section class="py-5 h-100">
+	  <div class="container">
+	    <h2 class="font-weight-light"> </h2>
+	    <p> </p>
+	  </div>
+	</section>
 
 </div>
 

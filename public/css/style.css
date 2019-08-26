@@ -1,3 +1,12 @@
+.masthead {
+  height: 100vh;
+  min-height: 500px;
+  background-image: url('/images/bluebg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 .alertbar {
   padding: 20px;
   background-color: #f44336;
@@ -32,4 +41,14 @@
 
 .help-block {
   color: red;
+}
+
+#mainheader {
+  color: white;
+  font-weight: bold;
+  font-size: 3em;
+}
+#mainheadersub {
+  color: white;
+  font-size: 2em;
 }

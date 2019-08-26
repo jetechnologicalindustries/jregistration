@@ -29,6 +29,13 @@
 <!-- DATATABLE BUNDLE -->
   <script type="text/javascript" src='/js/jquery.dataTables.min.js'></script>
 <!-- CUSTOM JS -->
+{{#unless allowPortrait}}
+<script type="text/javascript">let mustbeLandscape = true; //handler for viewportcheker</script>
+{{/unless}}
+{{#if allowPortrait}}
+<script type="text/javascript">let mustbeLandscape = false; //handler for viewportcheker</script>
+{{/if}}
+
   <script type="text/javascript" src='/js/main.js'></script>
 {{#if validator}}
 <!-- CUSTOM Validator -->
@@ -38,6 +45,11 @@
 <!-- CUSTOM GoLev Script -->
   <script type="text/javascript" src='/js/golev.js'></script>
 {{/if}}
+{{#if jets}}
+<!-- CUSTOM JETS Script -->
+  <script type="text/javascript" src='/js/index.js'></script>
+{{/if}}
+
 </body>
 
 
