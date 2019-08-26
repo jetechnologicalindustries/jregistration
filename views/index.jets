@@ -1,7 +1,7 @@
 
 {{> alert}}
 
-<div id="content" class="">
+<div id="content" class="bg-secondary">
 
 	<header class="masthead">
 		<!-- <div id="bg-opaque"class="h-100" style="background: rgba(99, 99, 99, 0.6);"> -->
@@ -11,17 +11,30 @@
 		      <div class="col-12 text-center py-5" style="">
 		        <h1 id="mainheader" class="text-white"></h1>
 		        <p id="mainheadersub" class="lead text-white"></p>
+
+	        	<button id="btn1" class="btn btn-primary" disabled>
+			  	<span class="spinner-grow spinner-grow-sm"></span>
+			  		Loading..
+				</button>
+
 		      </div>
 		    </div>
 		  </div>
 	    </div>
 	</header>
 {{> navbar}}
+
 	<!-- Page Content -->
-	<section class="py-5 h-100">
-	  <div class="container">
-	    <h2 class="font-weight-light"> </h2>
-	    <p> </p>
+	<section id="section1" class="bg-secondary">
+	  <div class="fullsection">
+	    <div class="container h-100">
+		    <div class="row h-100 align-items-center">
+		      <div class="col-12 text-center py-5" style="">
+		        <h1 id="" class="text-white">Welcome</h1>
+		        <p id="" class="lead text-white">Please select a project on one of the tabs</p>
+		      </div>
+		    </div>
+		  </div>
 	  </div>
 	</section>
 
