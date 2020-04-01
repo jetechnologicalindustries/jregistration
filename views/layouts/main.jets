@@ -16,6 +16,16 @@
     demo = false;
   </script>
   
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M6EX8DGEL6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-M6EX8DGEL6');
+</script>
+
 </head>
 <body class="bodyBg">
 
@@ -37,8 +47,13 @@
 {{#if allowPortrait}}
 <script type="text/javascript">let mustbeLandscape = false; //handler for viewportcheker</script>
 {{/if}}
-
+{{#if main}}
   <script type="text/javascript" src='/js/main.js'></script>
+{{/if}}
+{{#if hmo}}
+<!-- CUSTOM HMO Script -->
+  <script type="text/javascript" src='/js/hmo.js'></script>
+{{/if}}
 {{#if validator}}
 <!-- CUSTOM Validator -->
   <script type="text/javascript" src='/js/validation.js'></script>

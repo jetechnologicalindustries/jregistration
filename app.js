@@ -10,7 +10,7 @@ const hbs = exphbs.create({
 	defaultLayout: 'main',
 	extname: '.jets'
 });
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 1108;
 
 //db start
 const couch = new NodeCouchDB({
@@ -32,7 +32,13 @@ couch.listDatabases().then(function(dbs){
 
 const app = express();
 
-//timestamper
+//=======================================================================
+//=============================TIMESTAMPER===============================
+//= Allows Timestamp for console logging
+//=
+//=
+//=
+//=======================================================================
 function timeStamp(color, text){
 	let x = color;
 	let y;
@@ -46,14 +52,19 @@ function timeStamp(color, text){
 	console.log(`${tynt.Yellow(moment().format("dddd, MMMM Do YYYY, h:mm:ss a"))}` + y);
 };
 
-// app.get('/favicon.ico', (req, res) => res.status(204));
-// app.get('/css/style/css', (req, res) => res.status(204));
-
-//
+//=======================================================================
+//=============================Middle Wares==============================
+//= Publics - declares static files
+//= Middlewares - logger - logs files for jregistration
+//=             - handlebars middleware - replaces .jets to 
+//=               proper .handlebars
+//=             - bodyparser for reading json files
+//=======================================================================
+//Publics
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Init middleware
-app.use('/jregistration', logger);
+app.use('/', logger);
 
 // Handlebars Middleware
 app.engine('.jets', hbs.engine);
@@ -103,7 +114,8 @@ app.get('/jregistration', function(req,res){
 		link3name: 'New',
 		link8: 1,
 		link8url: '/',
-		link8name: 'JET Services'
+		link8name: 'JET Services',
+		main: true
 	});
 });
 
@@ -130,7 +142,8 @@ app.all('/jregistration/members', function(req,res){
 			link8: 1,
 			link8url: '/',
 			link8name: 'JET Services',
-		    members: data.data.rows
+		    members: data.data.rows,
+			main: true
 		  });
   	},
   	function(err){
@@ -157,8 +170,9 @@ app.all('/jregistration/members', function(req,res){
 				link8: 1,
 				link8url: '/',
 				link8name: 'JET Services',
-				demomembers: members
-  		});
+				demomembers: members,
+				main: true
+  			});
 		});
 
   	});
@@ -183,7 +197,8 @@ app.all('/jregistration/members/new', function(req,res){
 		link8: 1,
 		link8url: '/',
 		link8name: 'JET Services',
-		validator: true
+		validator: true,
+		main: true
 	});
 });
 
@@ -307,6 +322,14 @@ app.post('/jregistration/member/delete/', function(req, res){
 		});
 });
 
+//=======================================================================
+//================================GO LEV=================================
+//=
+//=
+//=
+//=
+//=======================================================================
+
 app.get('/golev', function(req,res){
 	fs.readFile('./files/items.json', 'utf8', function(err, data) {
 		if (err) throw err;
@@ -328,6 +351,49 @@ app.get('/golev', function(req,res){
 	});
 
 });
+
+//=======================================================================
+//==============================DAD'S HMO================================
+//=
+//=/hmo is the homepage
+//=/json/hmo.json is the database
+//=
+//=======================================================================
+
+app.all('/hmo', function(req,res){
+  		fs.readFile('./files/hmo.json', 'utf8', function(err, data) {
+			if (err) throw err;
+			let hmo = (data);
+			res.render('hmo', { 
+		  		title: 'HMO Homepage',
+		  		titleurl: '/hmo',
+		  		navtitle: 'HMO Homepage',
+		  		link1: 1,
+		  		link1url: '/hmo',
+		  		link1name: 'Home',
+				link8: 1,
+				link8url: '/',
+				link8name: 'JET Services',
+				hmodata: hmo,
+				hmo: true
+  			});
+		});
+});
+
+app.all('/json/hmo.json', function(req,res){
+	timeStamp("Red", "requested for hmo.json");
+});
+
+
+//==========================TERMINAL INTERFACE===========================
+//=JET services
+//=Server Running
+//=list of variables:
+//= -port = declared at top
+//= -tynt = terminal color manager
+//= -app = express
+//=
+//=======================================================================
 
 function serverStart() {
 	app.listen(port, function(){
