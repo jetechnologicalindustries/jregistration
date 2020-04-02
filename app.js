@@ -353,6 +353,47 @@ app.get('/golev', function(req,res){
 });
 
 //=======================================================================
+//==============================NEWS PAGE================================
+//=
+//=/news is the homepage
+//=/json/hmo.json is the database
+//=
+//=======================================================================
+
+app.all('/news', function(req,res){
+  		fs.readFile('./files/articles.json', 'utf8', function(err, data) {
+			if (err) throw err;
+			let articles = (data);
+			res.render('newspage', { 
+		  		title: 'JET News',
+		  		titleurl: '/news',
+		  		navtitle: 'JET News',
+		  		link1: 1,
+		  		link1url: '/news/about',
+		  		link1name: 'About',
+		  		link2: 1,
+		  		link2url: '/news/trending',
+		  		link2name: 'Trending',
+		  		link3: 1,
+		  		link3url: '/news/trending/local',
+		  		link3name: 'Local',
+		  		link4: 1,
+		  		link4url: '/news/trending/international',
+		  		link4name: 'International',
+				link8: 1,
+				link8url: '/',
+				link8name: 'JET Services',
+				articles: articles,
+				news: true
+  			});
+		});
+});
+
+app.all('/json/news.json', function(req,res){
+	timeStamp("Red", "requested for news.json");
+});
+
+//=======================================================================
 //==============================DAD'S HMO================================
 //=
 //=/hmo is the homepage

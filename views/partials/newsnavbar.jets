@@ -1,0 +1,47 @@
+<header>
+        <div class="bg-191">
+            <div class="container"> 
+                <div class="oflow-hidden color-ash font-9 text-sm-center ptb-sm-5">
+                
+                    <ul class="float-left float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-10">
+                        <li><a class="pl-0 pl-sm-10" href="#">About</a></li>
+                        <li><a href="#">Advertise</a></li>
+                        <li><a href="#">Submit Press Release</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                    <ul class="float-right float-sm-none list-a-plr-10 list-a-plr-sm-5 list-a-ptb-15 list-a-ptb-sm-5">
+                        <li><a class="pl-0 pl-sm-10" href="#"><i class="ion-social-facebook"></i></a></li>
+                        <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                        <li><a href="#"><i class="ion-social-google"></i></a></li>
+                        <li><a href="#"><i class="ion-social-instagram"></i></a></li>
+                        <li><a href="#"><i class="ion-social-bitcoin"></i></a></li>
+                    </ul>
+                    
+                </div><!-- top-menu -->
+            </div><!-- container -->
+        </div><!-- bg-191 -->
+        
+        <div class="container">
+            <div style="float:left; margin-top: 5px; padding:10px;  font-size: 2em; font-family: 'Lucida Console'; font-stretch: expanded; ">
+            <a href="{{titleurl}}"><span style="color: #cc9900;">JET</span>news</a>
+        </div>
+                     
+            <a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>
+            
+            <ul class="main-menu" id="main-menu">
+                {{# if link1}}<li><a href="{{link1url}}">{{link1name}}</a></li>{{/ if}}
+                {{# if link2}}<li class="drop-down"><a href="{{link2url}}" class="">{{link2name}}<i class="ion-arrow-down-b"></i></a>
+                    <ul class="drop-down-menu drop-down-inner">
+                        {{# if link3}}<li><a href="{{link3url}}">{{link3name}}</a></li>{{/ if}}
+                        {{# if link4}}<li><a href="{{link4url}}">{{link4name}}</a></li>{{/ if}}
+                    </ul>
+                </li>
+                {{/ if}}
+                {{# if link5}}<li><a href="{{link5url}}">{{link5name}}</a></li>{{/ if}}
+                {{# if link6}}<li><a href="{{link6url}}">{{link6name}}</a></li>{{/ if}}
+                {{# if link7}}<li><a href="{{link7url}}">{{link7name}}</a></li>{{/ if}}
+                {{# if link8}}<li><a href="{{link8url}}">{{link8name}}</a></li>{{/ if}}
+            </ul>
+            <div class="clearfix"></div>
+        </div><!-- container -->
+    </header>

@@ -7,8 +7,18 @@
 	<link rel='stylesheet' type='text/css' href='/css/bootstrap.min.css' />
 <!-- DATATABLE BUNDLE -->
 	<link rel='stylesheet' type='text/css' href='/css/jquery.dataTables.min.css' />
+{{#unless news}}
 <!-- CUSTOM STYLESHEET -->
 	<link rel='stylesheet' type='text/css' href='/css/style.css' />
+{{/unless}}
+{{#if news}}
+<!-- NEWS STYLESHEET -->
+  <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
+  <link href="/css/ionicons.css" rel="stylesheet">
+  <link rel='stylesheet' type='text/css' href='/css/news.css' />
+{{/if}}
+
+
   <!-- FONT -->
   <link href="https://fonts.googleapis.com/css?family=Teko&display=swap" rel="stylesheet">
   <script type="text/javascript">
@@ -65,6 +75,11 @@
 {{#if jets}}
 <!-- CUSTOM JETS Script -->
   <script type="text/javascript" src='/js/index.js'></script>
+{{/if}}
+{{#if news}}
+<!-- CUSTOM JETS Script -->
+  <script src="/js/tether.min.js"></script>
+  <script type="text/javascript" src='/js/news.js'></script>
 {{/if}}
 
 </body>
