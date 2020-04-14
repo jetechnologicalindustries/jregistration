@@ -12,6 +12,7 @@
 	<link rel='stylesheet' type='text/css' href='/css/style.css' />
 {{/unless}}
 {{#if news}}
+{{> newsCovidmeta}}
 <!-- NEWS STYLESHEET -->
   <link href="https://fonts.googleapis.com/css?family=Encode+Sans+Expanded:400,600,700" rel="stylesheet">
   <link href="/css/ionicons.css" rel="stylesheet">
