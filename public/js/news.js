@@ -222,11 +222,68 @@ function dropdownMenu(winWidth){
 		});
 	}
 	
-}
+};
 
 function isExists(elem){
 	if ($(elem).length > 0) { 
 		return true;
 	}
 	return false;
-}
+};
+
+//NEWS CHANGE ARTICLES
+
+
+
+
+$(document).ready(function () {
+	
+	console.log(articles);
+	console.log(articles[0].articleid);
+	console.log(articles[0].title);
+	console.log('Views: ' + articles[0].views);
+	console.log(articles[0].author.first + ' ' + articles[0].author.last);
+	//changes headline
+	$('.headline').each(function(){
+	    let xtemp, xlen, xarr, xid;
+	    xtemp = $(this).parent().attr('id');
+	    xlen = xtemp.length;
+	    xarr = xtemp.charAt(0);
+	    xid = xtemp.slice(1, xlen);
+	    if (articles[xarr].articleid === xid) {
+	    	$(this).html("<b>"+articles[xarr].title+"</b>");
+	    }
+	  });
+	//changes author
+	$('.author').each(function(){
+	    let xtemp, xlen, xarr, xid;
+	    xtemp = $(this).closest('div').attr('id');
+	    xlen = xtemp.length;
+	    xarr = xtemp.charAt(0);
+	    xid = xtemp.slice(1, xlen);
+	    if (articles[xarr].articleid === xid) {
+	    	$(this).html("<b>"+articles[xarr].author.first + ' ' + articles[xarr].author.last+"</b>");
+	    }
+	  });
+	//changes date
+	$('.date').each(function(){
+	    let xtemp, xlen, xarr, xid;
+	    xtemp = $(this).closest('div').attr('id');
+	    xlen = xtemp.length;
+	    xarr = xtemp.charAt(0);
+	    xid = xtemp.slice(1, xlen);
+	    if (articles[xarr].articleid === xid) {
+	    	$(this).html(articles[xarr].datepublished);
+	    }
+	  });
+	//changes photo
+	$('.photo').each(function(){
+	    let xtemp, xid;
+	    xid = $(this).attr('id');
+	    xtemp = "url(../images/"+xid+".jpg) no-repeat center"
+		$(this).css({"background": xtemp,"background-size": "cover"});
+	  });
+
+	
+
+});

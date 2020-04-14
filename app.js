@@ -91,6 +91,9 @@ app.get('/', function(req,res){
 		link3: 1,
 		link3url: '/golev',
 		link3name: 'GoLev SKU',
+		link4: 1,
+		link4url: '/news',
+		link4name: 'JETnews',
 		jets: true,
 		allowPortrait: true,
 	});
@@ -425,6 +428,35 @@ app.all('/json/hmo.json', function(req,res){
 	timeStamp("Red", "requested for hmo.json");
 });
 
+
+//=======================================================================
+//==============================ERROR 404================================
+//=
+//=======================================================================
+
+app.use((req, res, next) => {
+    timeStamp("Red", "Requested page not found (Error 404)");
+    res.status(404).render('404', {
+		title: 'JET Services',
+		titleurl: '/',
+		navtitle: 'JET Services',
+		link1: 1,
+		link1url: '/',
+  		link1name: 'Home',
+  		link2: 1,
+		link2url: '/jregistration',
+		link2name: 'JRegistration',
+		link3: 1,
+		link3url: '/golev',
+		link3name: 'GoLev SKU',
+		link4: 1,
+		link4url: '/news',
+		link4name: 'JETnews',
+		jets: true,
+		errorpage: true,
+		allowPortrait: true
+	});
+});
 
 //==========================TERMINAL INTERFACE===========================
 //=JET services

@@ -23,7 +23,8 @@
         
         <div class="container">
             <div style="float:left; margin-top: 5px; padding:10px;  font-size: 2em; font-family: 'Lucida Console'; font-stretch: expanded; ">
-            <a href="{{titleurl}}"><span style="color: #cc9900;">JET</span>news</a>
+            <a href="{{titleurl}}"><span class="color-primary">JET</span>news</a>
+            </div>
         </div>
                      
             <a class="menu-nav-icon" data-menu="#main-menu" href="#"><i class="ion-navicon"></i></a>

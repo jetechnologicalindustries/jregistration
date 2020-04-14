@@ -77,9 +77,13 @@
   <script type="text/javascript" src='/js/index.js'></script>
 {{/if}}
 {{#if news}}
-<!-- CUSTOM JETS Script -->
+<!-- CUSTOM NEWS Script -->
   <script src="/js/tether.min.js"></script>
   <script type="text/javascript" src='/js/news.js'></script>
+{{/if}}
+{{#if errorpage}}
+<!-- CUSTOM 404 Script -->
+  <script type="text/javascript" src='/js/404.js'></script>
 {{/if}}
 
 </body>

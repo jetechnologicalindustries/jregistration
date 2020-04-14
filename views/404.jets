@@ -1,0 +1,22 @@
+{{> navbar}}
+
+
+<div class="container mt-3 px-5 pb-5 bg-secondary">
+  <div id="txt1" class="text-center text-light jetfade" style="font-size: 8em">OOPS</div>
+  <div id="txt2" class="text-center text-light jetfade" style="font-size: 2em">ERROR 404</div>
+  <div id="txt3" class="text-center text-light jetfade" style="font-size: 3em">PAGE NOT FOUND</div>
+  <br>
+  <div id="homebtn" class="text-center jetfade">
+  		<a href="/"><button type="button" class="mb-3 btn btn-info">Back to Homepage</button></a>
+  		<!-- PAYPAL DONATE BUTTON -->
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_donations" />
+			<input type="hidden" name="business" value="Y3VAJMR9WBZDL" />
+			<input type="hidden" name="item_name" value="Help people devastated by the COVID19 crisis" />
+			<input type="hidden" name="currency_code" value="PHP" />
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" />
+			<img alt="" border="0" src="https://www.paypal.com/en_PH/i/scr/pixel.gif" width="1" height="1" />
+			</form>
+		<!-- END PAYPAL DONATE BUTTON -->
+  </div>
+</div>
