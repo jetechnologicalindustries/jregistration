@@ -140,7 +140,7 @@
       <input type="hidden" name="business" value="Y3VAJMR9WBZDL" />
       <input type="hidden" name="item_name" value="Help people devastated by the COVID-19 crisis" />
       <input type="hidden" name="currency_code" value="PHP" />
-      <input type="image" src="../images/paypalDonateBTN.png" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donate with PayPal button" style="width:250; height:142px;"/>
+      <input type="image" src="../images/paypalDonateBTN.png" border="0" name="submit" title="Donate to COVID-19 victims now!" alt="Donate with PayPal button" style="width:250; height:142px;"/>
       <img alt="" border="0" src="https://www.paypal.com/en_PH/i/scr/pixel.gif" width="1" height="1" />
       </form>
   <b>All donations are secured by Paypal</b>
